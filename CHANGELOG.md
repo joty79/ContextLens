@@ -6,3 +6,4 @@
 - Combined Lens OCR and clipboard image actions behind a shared context menu launcher.
 - Added a small ContextLens Manager for update, repair, logs, and uninstall actions.
 - Prepared the project for InstallerCore-generated installation.
+- Changed the context menu Manager action to open the generated InstallerCore installer in Windows Terminal.

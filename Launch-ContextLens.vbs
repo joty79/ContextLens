@@ -1,9 +1,11 @@
 ' Hidden launcher for ContextLens Explorer verbs.
 Set shell = CreateObject("WScript.Shell")
+Set shellApp = CreateObject("Shell.Application")
 Set fso = CreateObject("Scripting.FileSystemObject")
 
 scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)
 scriptPath = scriptDir & "\Invoke-ContextLens.ps1"
+installerPath = scriptDir & "\Install.ps1"
 
 If WScript.Arguments.Count > 0 Then
     action = WScript.Arguments(0)
@@ -22,7 +24,10 @@ cmd = "pwsh.exe -NoProfile -STA -ExecutionPolicy Bypass -File " & quote & script
       " -Action " & quote & action & quote & " -TargetPath " & quote & targetPath & quote
 
 If UCase(action) = "MANAGER" Then
-    windowStyle = 1
+    wtArgs = "-w 0 nt --title " & quote & "ContextLens Installer" & quote & _
+             " pwsh.exe -NoProfile -ExecutionPolicy Bypass -File " & quote & installerPath & quote
+    shellApp.ShellExecute "wt.exe", wtArgs, "", "open", 1
+    WScript.Quit 0
 Else
     windowStyle = 0
 End If
