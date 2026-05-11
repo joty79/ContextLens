@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.2.2 - 2026-05-11
+
+- Fixed update-status display when GitHub raw metadata is stale but the installed commit already matches `origin/master`.
+
 # 0.2.1 - 2026-05-11
 
 - Fixed the ContextLens app menu crash in hosts where `ReadKey()` does not expose a `KeyChar` property.

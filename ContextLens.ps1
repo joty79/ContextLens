@@ -246,6 +246,16 @@ function Resolve-AppUpdateStatus {
         return $script:AppUpdateStatus
     }
 
+    if (
+        -not [string]::IsNullOrWhiteSpace($source.Commit) -and
+        -not [string]::IsNullOrWhiteSpace($remote.Commit) -and
+        $source.Commit -eq $remote.Commit -and
+        -not [string]::IsNullOrWhiteSpace($remote.LatestVersion) -and
+        [string]$remote.LatestVersion -ne [string]$script:AppVersion
+    ) {
+        $remote.LatestVersion = $script:AppVersion
+    }
+
     $statusName = 'UpToDate'
     $message = "ContextLens is up to date with GitHub $($remote.Branch)."
     if ($source.SourceKind -eq 'Workspace' -and $source.HasLocalChanges) {

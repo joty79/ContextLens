@@ -17,6 +17,15 @@
 
 ## Decision Log
 
+### Entry - 2026-05-11 (Same commit beats stale raw metadata)
+
+- Date: 2026-05-11
+- Problem: The `Update app` submenu could show `Current version: 0.2.1`, `Latest version: 0.2.0`, identical current/latest commits, and still report `Up to date`.
+- Root cause: The latest commit came from `git ls-remote`, but latest version came from GitHub raw `app-metadata.json`, which can lag behind the branch commit. The UI mixed those two sources without reconciling same-commit metadata.
+- Guardrail/rule: If current commit and latest branch commit are identical, ContextLens must not trust an older raw metadata version as the latest version. Same commit means the local app metadata is authoritative for display.
+- Files affected: `ContextLens.ps1`, `app-metadata.json`, `CHANGELOG.md`, `PROJECT_RULES.md`.
+- Validation/tests run: Generated `Install.ps1` from InstallerCore; PowerShell parser validation passed for `ContextLens.ps1` and generated `Install.ps1`; workspace `ContextLens.ps1 -NoUI` smoke showed v0.2.2; non-admin local install with `-NoExplorerRestart`; installed `ContextLens.ps1 -NoUI` smoke showed v0.2.2 and `Up to date with GitHub master`; focused status-object readback returned `LocalVersion=0.2.2`, `LatestVersion=0.2.2`, identical current/latest commits, and `Status=UpToDate`; GitHub update smoke planned after commit/push.
+
 ### Entry - 2026-05-11 (ReadKey host shape must be tolerant)
 
 - Date: 2026-05-11

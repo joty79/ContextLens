@@ -1,6 +1,6 @@
 {
   "name": "ContextLens",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repo": "joty79/ContextLens",
   "description": "Explorer context menu tools for OCR and clipboard image capture."
 }
