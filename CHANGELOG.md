@@ -1,5 +1,9 @@
 # Changelog
 
+# 0.2.1 - 2026-05-11
+
+- Fixed the ContextLens app menu crash in hosts where `ReadKey()` does not expose a `KeyChar` property.
+
 # 0.2.0 - 2026-05-11
 
 - Added a real `ContextLens.ps1` app UI with a main menu and `Update app` submenu modeled after the WinAppManager in-app update pattern.

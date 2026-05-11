@@ -100,10 +100,34 @@ function Read-ConsoleKey {
         $keyInfo = [Console]::ReadKey($true)
     }
 
-    $keyName = if ($keyInfo.PSObject.Properties['Key']) { [string]$keyInfo.Key } else { [string]$keyInfo.VirtualKeyCode }
+    $keyName = ''
+    $keyChar = [char]0
+    $virtualKeyCode = 0
+
+    if ($keyInfo.PSObject.Properties['Key']) {
+        $keyName = [string]$keyInfo.Key
+    }
+    elseif ($keyInfo.PSObject.Properties['VirtualKeyCode']) {
+        $virtualKeyCode = [int]$keyInfo.VirtualKeyCode
+        try {
+            $keyName = [string][System.Enum]::ToObject([System.ConsoleKey], $virtualKeyCode)
+        } catch {
+            $keyName = [string]$virtualKeyCode
+        }
+    }
+
+    if ($keyInfo.PSObject.Properties['KeyChar']) {
+        $keyChar = [char]$keyInfo.KeyChar
+    }
+    elseif ($keyInfo.PSObject.Properties['Character']) {
+        $keyChar = [char]$keyInfo.Character
+    }
+
+    if ($virtualKeyCode -eq 27 -or [int]$keyChar -eq 27) { $keyName = 'Escape' }
+    if ($virtualKeyCode -eq 13 -or [int]$keyChar -eq 13) { $keyName = 'Enter' }
     if ($keyName -eq 'Esc') { $keyName = 'Escape' }
     if ($keyName -eq 'Return') { $keyName = 'Enter' }
-    return [pscustomobject]@{ Key = $keyName; KeyChar = $keyInfo.KeyChar }
+    return [pscustomobject]@{ Key = $keyName; KeyChar = $keyChar; VirtualKeyCode = $virtualKeyCode }
 }
 
 function Write-Section {
