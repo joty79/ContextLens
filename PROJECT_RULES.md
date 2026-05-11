@@ -24,7 +24,7 @@
 - Root cause: `Read-ConsoleKey` assumed every host `ReadKey()` result exposes `KeyChar`, but some PowerShell host objects expose different key properties.
 - Guardrail/rule: ContextLens key handling must probe available properties (`Key`, `VirtualKeyCode`, `KeyChar`, `Character`) before reading them, following the tolerant WinAppManager pattern.
 - Files affected: `ContextLens.ps1`, `app-metadata.json`, `CHANGELOG.md`, `PROJECT_RULES.md`.
-- Validation/tests run: Generated `Install.ps1` from InstallerCore; PowerShell parser validation passed for `ContextLens.ps1`, generated `Install.ps1`, `InstallerCore\scripts\New-ToolInstaller.ps1`, and `InstallerCore\templates\Install.Template.ps1`; workspace `ContextLens.ps1 -NoUI` smoke showed v0.2.1; non-admin local install with `-NoExplorerRestart`; installed `ContextLens.ps1 -NoUI` smoke showed v0.2.1 and `Up to date with GitHub master`; installed `app-metadata.json` readback returned `0.2.1`; GitHub update smoke planned after commit/push.
+- Validation/tests run: Generated `Install.ps1` from InstallerCore; PowerShell parser validation passed for `ContextLens.ps1`, generated `Install.ps1`, `InstallerCore\scripts\New-ToolInstaller.ps1`, and `InstallerCore\templates\Install.Template.ps1`; workspace `ContextLens.ps1 -NoUI` smoke showed v0.2.1; non-admin local install with `-NoExplorerRestart`; installed `ContextLens.ps1 -NoUI` smoke showed v0.2.1 and `Up to date with GitHub master`; installed `app-metadata.json` readback returned `0.2.1`; GitHub `UpdateGitHub` smoke pulled commit `10fa4d4`; final installed `ContextLens.ps1 -NoUI` smoke showed v0.2.1 and `Up to date with GitHub master`.
 
 ### Entry - 2026-05-11 (Initial combined workspace)
 
