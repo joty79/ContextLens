@@ -18,7 +18,7 @@
 | 1 | **[OCR File](#ocr-file)** | Run Lens OCR on a selected image and save a sibling TXT file. |
 | 2 | **[OCR Clipboard](#ocr-clipboard)** | Read an image from the clipboard and save OCR text in the current folder. |
 | 3 | **[Save Clipboard Image](#save-clipboard-image)** | Save the current clipboard image as a timestamped PNG. |
-| 4 | **[ContextLens Manager](#contextlens-manager)** | Open the generated InstallerCore installer in Windows Terminal. |
+| 4 | **[ContextLens Manager](#contextlens-manager)** | Open the app UI with update status and update submenu. |
 
 ## OCR File
 
@@ -66,12 +66,13 @@ Folder background menu -> ContextLens -> Save clipboard image -> clipboard_image
 
 ## ContextLens Manager
 
-> Opens the generated InstallerCore `Install.ps1` flow in Windows Terminal.
+> Opens the ContextLens app UI in Windows Terminal.
 
 | Action | What it does |
 |--------|--------------|
-| `Open ContextLens Manager` | Launches `Install.ps1` in Windows Terminal. |
-| Installer menu | Provides the normal InstallerCore install/update/uninstall/log flow. |
+| `Update app` | Shows current/latest version, commits, source, method, and runs the update backend in place. |
+| `Open install logs` | Opens `logs\installer.log` if it exists. |
+| `Open install folder` | Opens the current app root in Explorer. |
 
 ## Installation
 
@@ -102,6 +103,7 @@ Folder background menu -> ContextLens -> Save clipboard image -> clipboard_image
 ```text
 ContextLens/
 ├── app-metadata.json              # App identity and version metadata
+├── ContextLens.ps1                # Main app UI and update submenu
 ├── Invoke-ContextLens.ps1         # Dispatcher for context menu actions
 ├── Launch-ContextLens.vbs         # Hidden Explorer launcher
 ├── Manage-ContextLens.ps1         # Legacy plain manager fallback

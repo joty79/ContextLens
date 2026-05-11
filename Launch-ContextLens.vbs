@@ -5,7 +5,7 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 
 scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)
 scriptPath = scriptDir & "\Invoke-ContextLens.ps1"
-installerPath = scriptDir & "\Install.ps1"
+managerPath = scriptDir & "\ContextLens.ps1"
 
 If WScript.Arguments.Count > 0 Then
     action = WScript.Arguments(0)
@@ -24,8 +24,8 @@ cmd = "pwsh.exe -NoProfile -STA -ExecutionPolicy Bypass -File " & quote & script
       " -Action " & quote & action & quote & " -TargetPath " & quote & targetPath & quote
 
 If UCase(action) = "MANAGER" Then
-    wtArgs = "-w 0 nt --title " & quote & "ContextLens Installer" & quote & _
-             " pwsh.exe -NoProfile -ExecutionPolicy Bypass -File " & quote & installerPath & quote
+    wtArgs = "-w 0 nt --title " & quote & "ContextLens" & quote & _
+             " pwsh.exe -NoProfile -ExecutionPolicy Bypass -File " & quote & managerPath & quote
     shellApp.ShellExecute "wt.exe", wtArgs, "", "open", 1
     WScript.Quit 0
 Else
